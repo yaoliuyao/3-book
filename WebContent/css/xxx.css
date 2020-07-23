@@ -1,0 +1,14 @@
+table, tr, td, th {
+	border: 1px solid black;
+	padding: 5px 1em;
+	border-collapse: collapse;
+	text-align: center;
+}
+table {
+	width: 98%;
+}
+
+.edit input {
+	display: block;
+	margin-bottom: 10px;
+}
