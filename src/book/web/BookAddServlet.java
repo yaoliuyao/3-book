@@ -1,8 +1,6 @@
-package book;
+package book.web;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,10 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import utils.DBHelper;
+import book.dao.BookDAO;
 
 @WebServlet("/add")
-public class BookAdd extends HttpServlet {
+public class BookAddServlet extends HttpServlet {
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String name = req.getParameter("bookName");
@@ -24,13 +22,9 @@ public class BookAdd extends HttpServlet {
 			req.getRequestDispatcher("/bookResult.jsp").forward(req, resp);
 		}
 		
-		String sql = "insert into book (bookname, price) values (?, ?)";
-		System.out.println("要执行的语句是: " + sql);
-		try (Connection connection = DBHelper.getConnection();
-				PreparedStatement statement = connection.prepareStatement(sql)) {
-			statement.setString(1, name);
-			statement.setFloat(2, Float.parseFloat(price));
-			statement.executeUpdate();
+		try {
+			BookDAO bookDAO = new BookDAO();
+			bookDAO.insert(name, Float.parseFloat(price));
 			
 			req.setAttribute("message", "保存成功");
 			req.getRequestDispatcher("/bookResult.jsp").forward(req, resp);

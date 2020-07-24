@@ -1,4 +1,4 @@
-package book;
+package book.filter;
 
 import java.io.IOException;
 

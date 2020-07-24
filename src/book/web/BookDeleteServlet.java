@@ -1,8 +1,6 @@
-package book;
+package book.web;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,10 +8,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import utils.DBHelper;
+import book.dao.BookDAO;
 
 @WebServlet("/del")
-public class BookDelete extends HttpServlet {
+public class BookDeleteServlet extends HttpServlet {
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String idString = req.getParameter("id");
@@ -23,12 +21,9 @@ public class BookDelete extends HttpServlet {
 			req.getRequestDispatcher("/bookResult.jsp").forward(req, resp);
 		}
 		
-		String sql = "delete  from book where id = ?";
-		try (Connection connection = DBHelper.getConnection();
-				PreparedStatement statement = connection.prepareStatement(sql)) {
-			statement.setInt(1, Integer.parseInt(idString));
-			int rows = statement.executeUpdate();
-			System.out.println("Delete rows count: " + rows);
+		try {
+			BookDAO bookDAO = new BookDAO();
+			bookDAO.delete(Integer.parseInt(idString));
 			
 			req.setAttribute("message", "Operation Success!");
 			req.getRequestDispatcher("/bookResult.jsp").forward(req, resp);

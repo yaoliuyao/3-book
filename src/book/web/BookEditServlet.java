@@ -1,9 +1,6 @@
-package book;
+package book.web;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,10 +8,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import utils.DBHelper;
+import book.bean.Book;
+import book.dao.BookDAO;
 
 @WebServlet("/edit")
-public class BookEdit extends HttpServlet {
+public class BookEditServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String id = req.getParameter("id");
@@ -24,24 +22,11 @@ public class BookEdit extends HttpServlet {
 			req.getRequestDispatcher("/bookResult.jsp").forward(req, resp);
 		}
 
-		String sql = "select id, bookName, price from book where id = ?";
-		System.out.println("要执行的 SQL: " + sql);
-		
-		try (Connection connection = DBHelper.getConnection();
-				PreparedStatement statement = connection.prepareStatement(sql)) {
-			statement.setInt(1, Integer.parseInt(id));
+		try {
+			Book book = new BookDAO().get(Integer.parseInt(id));
 			
-			try (ResultSet resultSet = statement.executeQuery()) {
-				resultSet.next();
-				
-				Book book = new Book(
-						resultSet.getInt(1),
-						resultSet.getString(2),
-						resultSet.getFloat(3));
-				
-				req.setAttribute("book", book);
-				req.getRequestDispatcher("/bookEdit.jsp").forward(req, resp);
-			}
+			req.setAttribute("book", book);
+			req.getRequestDispatcher("/bookEdit.jsp").forward(req, resp);
 		} catch (Exception e) {
 			req.setAttribute("message", e.getLocalizedMessage());
 			req.getRequestDispatcher("/bookResult.jsp").forward(req, resp);		
@@ -63,18 +48,9 @@ public class BookEdit extends HttpServlet {
 			req.getRequestDispatcher("/bookResult.jsp").forward(req, resp);
 		}
 		
-		String sql = "update book set bookName=?, price=? where id=?";
-		System.out.println("要执行的 SQL: " + sql);
-		
-		try (Connection connection = DBHelper.getConnection();
-				PreparedStatement statement = connection.prepareStatement(sql)) {
-			
-			statement.setString(1, name);
-			statement.setFloat(2, Float.parseFloat(price));
-			statement.setInt(3, Integer.parseInt(id));
-			int rows = statement.executeUpdate();
-			
-			if (rows == 0) throw new Exception("没有更新到任何语句");
+		try {
+			BookDAO bookDAO = new BookDAO();
+			bookDAO.update(Integer.parseInt(id), name, Float.parseFloat(price));
 			
 			req.setAttribute("message", "更新成功");
 			req.getRequestDispatcher("/bookResult.jsp").forward(req, resp);

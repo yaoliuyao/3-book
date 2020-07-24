@@ -1,4 +1,4 @@
-package book;
+package book.bean;
 
 public class Book {
 	public int id;

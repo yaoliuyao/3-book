@@ -1,4 +1,4 @@
-package book;
+package book.filter;
 
 import java.io.IOException;
 
@@ -10,6 +10,8 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+
+import book.dao.LogDAO;
 
 @WebFilter("/*")
 public class FangwenRizhiFilter implements Filter {
