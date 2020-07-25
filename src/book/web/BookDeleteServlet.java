@@ -19,6 +19,7 @@ public class BookDeleteServlet extends HttpServlet {
 		if (idString == null) {
 			req.setAttribute("message", "id should not be null. Delete Action ignored.");
 			req.getRequestDispatcher("/bookResult.jsp").forward(req, resp);
+			return;
 		}
 		
 		try {

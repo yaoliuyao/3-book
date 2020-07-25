@@ -20,6 +20,7 @@ public class BookEditServlet extends HttpServlet {
 		if (id == null) {
 			req.setAttribute("message", "参数错误");
 			req.getRequestDispatcher("/bookResult.jsp").forward(req, resp);
+			return;
 		}
 
 		try {
@@ -35,10 +36,6 @@ public class BookEditServlet extends HttpServlet {
 	
 	@Override
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		req.setCharacterEncoding("utf-8");
-		resp.setCharacterEncoding("utf-8");
-		resp.setContentType("text/html;charset=utf8");
-		
 		String id = req.getParameter("id");
 		String name = req.getParameter("bookName");
 		String price = req.getParameter("price");
@@ -46,6 +43,7 @@ public class BookEditServlet extends HttpServlet {
 		if (id == null || name == null || price == null) {
 			req.setAttribute("message", "参数不对");
 			req.getRequestDispatcher("/bookResult.jsp").forward(req, resp);
+			return;
 		}
 		
 		try {

@@ -20,6 +20,7 @@ public class BookAddServlet extends HttpServlet {
 		if (name == null || price == null) {
 			req.setAttribute("message", "参数不对");
 			req.getRequestDispatcher("/bookResult.jsp").forward(req, resp);
+			return;
 		}
 		
 		try {
