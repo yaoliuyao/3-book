@@ -1,4 +1,4 @@
-package book.util;
+package book.utils;
 
 import java.io.UnsupportedEncodingException;
 

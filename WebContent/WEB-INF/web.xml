@@ -9,4 +9,8 @@
 		<filter-name>FangwenRizhiFilter</filter-name>
 		<filter-class>book.filter.FangwenRizhiFilter</filter-class>
 	</filter>
+	
+	<session-config>
+		<session-timeout>30</session-timeout>
+	</session-config>
 </web-app>

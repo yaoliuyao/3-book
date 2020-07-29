@@ -3,7 +3,7 @@ package book.dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import utils.DBHelper;
+import book.utils.DBHelper;
 
 public class LogDAO {
 	public void insert(String url, String ip, String userAgent) throws Exception {
