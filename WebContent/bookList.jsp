@@ -1,11 +1,11 @@
-<%@page import="book.bean.Account"%>
-<%@page import="book.bean.Book"%>
-<%@page import="java.util.List"%>
-<%@page language="java" contentType="text/html; charset=utf-8"
-	pageEncoding="utf-8"%>
+<%@ page import="book.bean.Account"%>
+<%@ page import="book.bean.Book"%>
+<%@      page import="java.util.List"%>
+<%@page language="java" contentType="text/html; charset=utf-8" pageEncoding="utf-8"  %>
 	
 <%
 	List<Book> books = (List<Book>) request.getAttribute("xxx");
+	pageContext.setAttribute("yigeshu", "33333");
 %>
 	
 <html>
@@ -35,7 +35,7 @@
 		<span>
 		<%
 			Object o = session.getAttribute("account");
-			
+		
 			if (o == null) {
 				out.print("<a href='/book/login'>登录</a>");
 			} else {
@@ -87,5 +87,10 @@
 		</tr>
 		<% } %>
 	</table>
+	
+	<%@ include file="footer.jsp" %>
 </body>
 </html>
+
+
+

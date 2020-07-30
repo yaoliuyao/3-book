@@ -16,5 +16,6 @@
 	<a href='/book/list'>返回首页</a>
 </div>
 
+<%@ include file="/footer.jsp" %>
 </body>
 </html>
