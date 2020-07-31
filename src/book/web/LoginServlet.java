@@ -43,7 +43,7 @@ public class LoginServlet extends HttpServlet {
 				session.setAttribute("account", account);
 				
 				req.setAttribute("message", "µÇÂ¼³É¹¦!!!");
-				req.setAttribute("page", "/book/list");
+				req.setAttribute("page", "/list");
 				req.getRequestDispatcher("/login/result.jsp").forward(req, resp);
 			}
 		} catch (Exception e) {

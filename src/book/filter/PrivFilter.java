@@ -20,7 +20,7 @@ public class PrivFilter implements Filter {
 		
 		if (req.getSession().getAttribute("account") == null) {
 			req.setAttribute("message", "您没有权限做这样的事情");
-			req.getRequestDispatcher("/bookResult.jsp").forward(request, response);
+			req.getRequestDispatcher("/book/bookResult.jsp").forward(request, response);
 			return;
 		}
 		

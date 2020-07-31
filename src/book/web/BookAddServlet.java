@@ -16,36 +16,28 @@ public class BookAddServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String name = req.getParameter("bookName");
 		String price = req.getParameter("price");
-		
+
 		if (name == null || price == null) {
 			req.setAttribute("message", "参数不对");
-			req.getRequestDispatcher("/bookResult.jsp").forward(req, resp);
+			req.getRequestDispatcher("/book/bookResult.jsp").forward(req, resp);
 			return;
 		}
-		
+
 		try {
 			BookDAO bookDAO = new BookDAO();
 			bookDAO.insert(name, Float.parseFloat(price));
-			
+
 			req.setAttribute("message", "保存成功");
-			req.getRequestDispatcher("/bookResult.jsp").forward(req, resp);
+			req.getRequestDispatcher("/book/bookResult.jsp").forward(req, resp);
 		} catch (Exception e) {
 			req.setAttribute("message", e.getLocalizedMessage());
-			req.getRequestDispatcher("/bookResult.jsp").forward(req, resp);
+			req.getRequestDispatcher("/book/bookResult.jsp").forward(req, resp);
 		}
 	}
 
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.setAttribute("message", "I don't know what to do");
-		req.getRequestDispatcher("/bookResult.jsp").forward(req, resp);
+		req.getRequestDispatcher("/book/bookResult.jsp").forward(req, resp);
 	}
 }
-
-
-
-
-
-
-
-
