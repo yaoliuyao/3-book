@@ -15,6 +15,15 @@ import book.dao.AccountDAO;
 @WebServlet("/login")
 public class LoginServlet extends HttpServlet {
 	@Override
+	public void init() throws ServletException {
+		System.out.println(">>>> Login 我被实例化");
+	}
+	@Override
+	public void destroy() {
+		System.out.println(">>>> Login 我正被销毁");
+	}
+	
+	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		req.getRequestDispatcher("/login/login.jsp").forward(req, resp);
 	}

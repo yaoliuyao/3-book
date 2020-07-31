@@ -7,7 +7,7 @@
 <html>
 <head>
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="css/xxx.css">
+	<link rel="stylesheet" href="${r}/css/xxx.css">
 	<style>
 		form {
 			padding-bottom: 1em;
@@ -30,18 +30,18 @@
 		<h3>163 书籍管理系统</h3>
 		<span>
 			<c:if test="${empty sessionScope.account}">
-				<a href="${pageContext.request.contextPath}/login">登录</a>
+				<a href="${r}/login">登录</a>
 			</c:if>
 			<c:if test="${sessionScope.account != null}">
 				欢迎您 ${account.username} ! 
-				<a href="${pageContext.request.contextPath}/logout">注销</a>
+				<a href="${r}/logout">注销</a>
 			</c:if>
 		</span>
 	</header>
 	
 	<c:if test="${sessionScope.account != null}">
 	<div>
-		<form action='${pageContext.request.contextPath}/add' method='post'>
+		<form action='${r}/add' method='post'>
 			<input type='text' name='bookName' placeholder='书名'>
 			<input type='number' name='price' placeholder='价格'>
 			<button>添加书籍</button>
@@ -66,8 +66,8 @@
 			<td>${book.price}</td>
 			<c:if test="${sessionScope.account != null}">
 			<td>
-				<a href='${pageContext.request.contextPath}/del?id=${book.id}'>删除</a>
-				<a href='${pageContext.request.contextPath}/edit?id=${book.id}'>修改</a>
+				<a href='${r}/del?id=${book.id}'>删除</a>
+				<a href='${r}/edit?id=${book.id}'>修改</a>
 			</td>
 			</c:if>
 		</tr>
